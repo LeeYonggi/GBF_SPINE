@@ -4,11 +4,23 @@
 
 ImageManager::ImageManager()
 {
+	D3DXCreateSprite(DEVICE, &sprite);
+	D3DXCreateLine(DEVICE, &line);
+	line->SetWidth(2);
+	line->SetAntialias(true);
 }
 
 
 ImageManager::~ImageManager()
 {
+	SAFE_RELEASE(sprite);
+	SAFE_RELEASE(line);
+	for (auto iter : m_Texture)
+	{
+		SAFE_RELEASE(iter.second->tex);
+		SAFE_DELETE(iter.second);
+	}
+	m_Texture.clear();
 }
 
 Texture * ImageManager::AddTexture(string str, string path)
@@ -34,6 +46,53 @@ Texture * ImageManager::AddTexture(string str, string path)
 	return temp;
 }
 
-void ImageManager::DrawTexture(string str, Matrix pos, Matrix rotate, Matrix size)
+void ImageManager::DrawTexture(Texture *tex, Matrix pos, Matrix rotate, Matrix scale, RECT cutImage)
+{
+	Matrix matW;
+
+	matW = scale * rotate * pos;
+
+	sprite->SetTransform(&matW);
+
+	Vector3 center = { tex->info.Width * 0.5f, tex->info.Height * 0.5f, 0 };
+
+	sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	sprite->Draw(tex->tex, &cutImage, &center, nullptr, D3DXCOLOR(1, 1, 1, 1));
+	sprite->End();
+}
+
+void ImageManager::DrawTexture(Texture *tex, Vector2 pos, RECT cutImage, float rotate, float size)
+{
+	Matrix matW, matS, matR, matT;
+
+	D3DXMatrixScaling(&matS, size, size, 1);
+	D3DXMatrixRotationZ(&matR, rotate);
+	D3DXMatrixTranslation(&matT, pos.x, pos.y, 0);
+
+	matW = matS * matR * matT;
+
+	sprite->SetTransform(&matW);
+
+	Vector3 center = { tex->info.Width * 0.5f, tex->info.Height * 0.5f, 0 };
+
+	sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	sprite->Draw(tex->tex, &cutImage, &center, nullptr, D3DXCOLOR(1, 1, 1, 1));
+	sprite->End();
+}
+
+void ImageManager::DrawLine(vector<Vector2> vLine, D3DXCOLOR color)
+{
+	line->Begin();
+
+	line->Draw(&vLine[0], vLine.size(), color);
+
+	line->End();
+}
+
+void ImageManager::BeginSprite()
+{
+}
+
+void ImageManager::EndSprite()
 {
 }

@@ -15,10 +15,16 @@ public:
 
 private:
 	map<string, Texture*> m_Texture;
+	LPD3DXSPRITE sprite;
+	ID3DXLine *line;
 
 public:
 	Texture *AddTexture(string str, string path);
-	void DrawTexture(string str, Matrix pos, Matrix rotate, Matrix size);
+	void DrawTexture(Texture *tex, Matrix pos, Matrix rotate, Matrix scale, RECT cutImage);
+	void DrawTexture(Texture *tex, Vector2 pos, RECT cutImage, float rotate = 0, float size = 1);
+	void DrawLine(vector<Vector2> vLine, D3DXCOLOR color = D3DXCOLOR(0, 0, 0, 1));
+	void BeginSprite();
+	void EndSprite();
 
 };
 

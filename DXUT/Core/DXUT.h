@@ -79,6 +79,7 @@
 #include <iostream>
 #include <map>
 #include <queue>
+#include <functional>
 
 using namespace std;
 
@@ -105,6 +106,8 @@ using namespace std;
 // HRESULT translation for Direct3D and other APIs 
 #include <dxerr.h>
 
+auto __vsnwprintf = _vsnwprintf;
+
 
 #if defined(DEBUG) || defined(_DEBUG)
 #ifndef V
@@ -129,7 +132,7 @@ using namespace std;
 #define SAFE_DELETE_ARRAY(p) { if (p) { delete[] (p);   (p)=NULL; } }
 #endif    
 #ifndef SAFE_RELEASE
-#define SAFE_RELEASE(p)      { if (p) { (p)->Release(); (p)=NULL; } }
+#define SAFE_RELEASE(p)      { if (p) { (p)->Release(); } }
 #endif
 
 

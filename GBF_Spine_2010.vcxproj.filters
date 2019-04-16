@@ -18,6 +18,30 @@
     <Filter Include="Singleton\ImageManager">
       <UniqueIdentifier>{22fa37b1-1aa5-4abd-b887-1072c146240e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainProc">
+      <UniqueIdentifier>{eea953c0-d9e9-46e4-950d-d1e04cfeec74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\InputManager">
+      <UniqueIdentifier>{74003d0e-1541-4f94-86aa-27fc97ba8e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{5ba87cf8-333d-41b5-9d29-b2119f4649c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\SceneManager">
+      <UniqueIdentifier>{7f5238b1-2cd7-4fe3-af3a-85bfbc184215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\AtlasScene">
+      <UniqueIdentifier>{4c0b7194-744c-4d88-a795-7fdf3b5096d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{c8056eb8-6843-44f6-bda6-3bd145503110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI">
+      <UniqueIdentifier>{de50a468-eb5b-4fbc-bb67-96123ce5484e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\AtlasImage">
+      <UniqueIdentifier>{dfddb754-109d-4a75-b90f-d71ec0dc12ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -83,6 +107,30 @@
     <ClCompile Include="ImageManager.cpp">
       <Filter>Singleton\ImageManager</Filter>
     </ClCompile>
+    <ClCompile Include="MainProc.cpp">
+      <Filter>MainProc</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Singleton\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Singleton\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="AtlasScene.cpp">
+      <Filter>Scene\AtlasScene</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="AtlasImage.cpp">
+      <Filter>Object\AtlasImage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -91,6 +139,30 @@
     </ClInclude>
     <ClInclude Include="ImageManager.h">
       <Filter>Singleton\ImageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MainProc.h">
+      <Filter>MainProc</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Singleton\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Singleton\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AtlasScene.h">
+      <Filter>Scene\AtlasScene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="AtlasImage.h">
+      <Filter>Object\AtlasImage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

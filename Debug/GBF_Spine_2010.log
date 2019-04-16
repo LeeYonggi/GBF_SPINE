@@ -1,0 +1,11 @@
+﻿  AtlasImage.cpp
+d:\programming\pj\gbf_spine\atlasimage.cpp(35): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(36): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(37): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(38): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(39): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(72): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(73): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(78): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\atlasimage.cpp(79): warning C4244: '=': 'FLOAT'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GBF_Spine_2010.vcxproj -> D:\Programming\PJ\GBF_SPINE\Debug\GBF_Spine.exe
