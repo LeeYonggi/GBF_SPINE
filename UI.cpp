@@ -31,7 +31,7 @@ void UI::Update()
 
 void UI::Render()
 {
-	IMAGEMANAGER->DrawTexture(texture, pos, {0, 0, (int)size.x, (int)size.y});
+	IMAGEMANAGER->DrawTexture(texture, pos, {0, 0, (int)texture->info.Width, (int)texture->info.Height });
 }
 
 void UI::Release()

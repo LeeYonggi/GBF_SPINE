@@ -34,27 +34,27 @@ wstring CreateOpenFile() // OpenFile
 
 void AtlasScene::Init()
 {
-	ui = new UI([&]() { AddAtlasImage(); }, { 200, 50 }, {200, 100}, "./Image/Open.png");
+	fileOpenUi = new UI([&]() { AddAtlasImage(); }, { 200, 50 }, {200, 100}, "./Image/Open.png");
 }
 
 void AtlasScene::Update()
 {
 	if (atlasImage)
 		atlasImage->Update();
-	ui->Update();
+	fileOpenUi->Update();
 }
 
 void AtlasScene::Render()
 {
 	if (atlasImage)
 		atlasImage->Render();
-	ui->Render();
+	fileOpenUi->Render();
 }
 
 void AtlasScene::Release()
 {
-	SAFE_RELEASE(ui);
-	SAFE_DELETE(ui);
+	SAFE_RELEASE(fileOpenUi);
+	SAFE_DELETE(fileOpenUi);
 	SAFE_RELEASE(atlasImage);
 	SAFE_DELETE(atlasImage);
 }

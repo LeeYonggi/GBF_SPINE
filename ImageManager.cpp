@@ -61,19 +61,19 @@ void ImageManager::DrawTexture(Texture *tex, Matrix pos, Matrix rotate, Matrix s
 	sprite->End();
 }
 
-void ImageManager::DrawTexture(Texture *tex, Vector2 pos, RECT cutImage, float rotate, float size)
+void ImageManager::DrawTexture(Texture *tex, Vector2 pos, RECT cutImage, float rotate, Vector2 size)
 {
 	Matrix matW, matS, matR, matT;
 
-	D3DXMatrixScaling(&matS, size, size, 1);
-	D3DXMatrixRotationZ(&matR, rotate);
+	D3DXMatrixScaling(&matS, size.x, size.y, 1);
+	D3DXMatrixRotationZ(&matR, D3DXToRadian(rotate));
 	D3DXMatrixTranslation(&matT, pos.x, pos.y, 0);
 
 	matW = matS * matR * matT;
 
 	sprite->SetTransform(&matW);
 
-	Vector3 center = { tex->info.Width * 0.5f, tex->info.Height * 0.5f, 0 };
+	Vector3 center = { (cutImage.right - cutImage.left) * 0.5f, (cutImage.bottom - cutImage.top) * 0.5f, 0 };
 
 	sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	sprite->Draw(tex->tex, &cutImage, &center, nullptr, D3DXCOLOR(1, 1, 1, 1));

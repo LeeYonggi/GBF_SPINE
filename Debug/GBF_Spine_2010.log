@@ -1,5 +1,6 @@
-﻿  MainProc.cpp
-  SpineScene.cpp
-  코드를 생성하고 있습니다...
-AtlasImage.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/SAFESEH' 사양으로 인해 무시됩니다.
-  GBF_Spine_2010.vcxproj -> D:\Programming\PJ\Directx\GBF_SPINE\Debug\GBF_Spine.exe
+﻿  ImagePiece.cpp
+d:\programming\pj\gbf_spine\imagepiece.cpp(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\programming\pj\gbf_spine\imagepiece.cpp(58): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\programming\pj\gbf_spine\imagepiece.cpp(73): warning C4458: 'frame' 선언은 클래스 멤버를 숨깁니다.
+  d:\programming\pj\gbf_spine\imagepiece.h(22): note: 'ImagePiece::frame' 선언을 참조하십시오.
+  GBF_Spine_2010.vcxproj -> D:\Programming\PJ\GBF_SPINE\Debug\GBF_Spine.exe

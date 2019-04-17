@@ -11,7 +11,7 @@ public:
 	virtual ~AtlasScene();
 
 private:
-	UI * ui = nullptr;
+	UI * fileOpenUi = nullptr;
 	AtlasImage *atlasImage = nullptr;
 
 public:
@@ -24,3 +24,4 @@ public:
 	void AddAtlasImage();
 };
 
+wstring CreateOpenFile();

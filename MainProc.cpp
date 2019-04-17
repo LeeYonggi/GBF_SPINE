@@ -20,7 +20,6 @@ void MainProc::Init()
 
 void MainProc::Update()
 {
-	SCENEMANAGER->Update();
 	if (INPUTMANAGER->KeyDown('1'))
 	{
 		SCENEMANAGER->AddScene(new AtlasScene());
@@ -29,6 +28,7 @@ void MainProc::Update()
 	{
 		SCENEMANAGER->AddScene(new SpineScene());
 	}
+	SCENEMANAGER->Update();
 	INPUTMANAGER->Update();
 }
 

@@ -6,9 +6,10 @@ public:
 	virtual ~Object();
 
 protected:
-	Vector2 pos;
-	Vector2 size;
+	Vector2 pos = { 0, 0 };
+	Vector2 size = { 1, 1 };
 	Texture *texture = nullptr;
+	float rotation = 0;
 
 public:
 	virtual void Init()		PURE;
@@ -19,5 +20,14 @@ public:
 public:
 	bool IsCollisionRectMouse(POINT p1, POINT reSize);
 
+public:
+	Vector2 GetPos() { return pos; }
+	Vector2 GetSize() { return size; }
+	float GetRotation() { return rotation; }
+
+public:
+	void SetPos(Vector2 vec2) { pos = vec2; }
+	void SetSize(Vector2 vec2) { size = vec2; }
+	void SetRotation(float rotate) { rotation = rotate; }
 };
 

@@ -94,8 +94,10 @@ void AtlasImage::CreateMouseLine()
 
 void AddNumberStreamFile(fstream *fs, int number)
 {
-	*fs << number << ",";
+	*fs << number << "\t";
 }
+
+//file
 void AtlasImage::AddAtlasData()
 {
 	for (int i = 0; i < KEY_MAX; i++)
@@ -116,7 +118,7 @@ void AtlasImage::AddAtlasData()
 				return;
 			}
 			//WriteAtlasName
-			fs << atlasName << "/";
+			fs << atlasName << "\t";
 
 			//WriteRectInfo
 			AddNumberStreamFile(&fs, min(lineRect.left, lineRect.right));
