@@ -89,6 +89,26 @@ void ImageManager::DrawLine(vector<Vector2> vLine, D3DXCOLOR color)
 	line->End();
 }
 
+void ImageManager::DrawFont(string str, Vector2 pos, float size)
+{
+	LPD3DXFONT font;
+
+	D3DXCreateFontA(DEVICE, size, 0, FW_HEAVY, 1, false, HANGUL_CHARSET, 0, 0, 0, str.c_str(), &font);
+
+	RECT re = { 0 };
+
+	Matrix mat;
+	D3DXMatrixTranslation(&mat, pos.x, pos.y, 0);
+
+	sprite->SetTransform(&mat);
+
+	sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	font->DrawTextA(sprite, str.c_str(), -1, &re, DT_NOCLIP, D3DXCOLOR(1, 1, 1, 1));
+	sprite->End();
+
+	SAFE_RELEASE(font);
+}
+
 void ImageManager::BeginSprite()
 {
 }

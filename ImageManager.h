@@ -23,6 +23,7 @@ public:
 	void DrawTexture(Texture *tex, Matrix pos, Matrix rotate, Matrix scale, RECT cutImage);
 	void DrawTexture(Texture *tex, Vector2 pos, RECT cutImage, float rotate = 0, float size = 1);
 	void DrawLine(vector<Vector2> vLine, D3DXCOLOR color = D3DXCOLOR(0, 0, 0, 1));
+	void DrawFont(string str, Vector2 pos, float size);
 	void BeginSprite();
 	void EndSprite();
 

@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "AtlasImage.h"
 
+#include <fstream>
 
 
 AtlasImage::AtlasImage(string str)
@@ -21,6 +22,10 @@ void AtlasImage::Update()
 {
 	ScrollControl();
 	CreateMouseLine();
+	
+	if (isOnDrawRect)
+		AddAtlasData();
+
 }
 
 void AtlasImage::Render()
@@ -31,14 +36,18 @@ void AtlasImage::Render()
 	IMAGEMANAGER->DrawTexture(texture, center, {0, 0, (int)texture->info.Width, (int)texture->info.Height });
 
 	//DrawMouseLine
-	vector<Vector2> vLine;
-	vLine.push_back(scroll + Vector2(lineRect.left, lineRect.top));
-	vLine.push_back(scroll + Vector2(lineRect.right, lineRect.top));
-	vLine.push_back(scroll + Vector2(lineRect.right, lineRect.bottom));
-	vLine.push_back(scroll + Vector2(lineRect.left, lineRect.bottom));
-	vLine.push_back(scroll + Vector2(lineRect.left, lineRect.top));
+	if (isOnDrawRect)
+	{
+		vector<Vector2> vLine;
+		vLine.push_back(scroll + Vector2(lineRect.left, lineRect.top));
+		vLine.push_back(scroll + Vector2(lineRect.right, lineRect.top));
+		vLine.push_back(scroll + Vector2(lineRect.right, lineRect.bottom));
+		vLine.push_back(scroll + Vector2(lineRect.left, lineRect.bottom));
+		vLine.push_back(scroll + Vector2(lineRect.left, lineRect.top));
 
-	IMAGEMANAGER->DrawLine(vLine);
+		IMAGEMANAGER->DrawLine(vLine);
+	}
+	IMAGEMANAGER->DrawFont(atlasName, {50, 650}, 70);
 }
 
 void AtlasImage::Release()
@@ -67,17 +76,61 @@ void AtlasImage::ScrollControl()
 
 void AtlasImage::CreateMouseLine()
 {
-	if (INPUTMANAGER->KeyDown(VK_LBUTTON) && isOnMouseLine == false)
+	if (INPUTMANAGER->KeyDown(VK_LBUTTON))
 	{
+		atlasName = "";
 		lineRect.left = INPUTMANAGER->GetMouse().x - scroll.x;
 		lineRect.top = INPUTMANAGER->GetMouse().y - scroll.y;
-		isOnMouseLine = true;
+		lineRect.right = INPUTMANAGER->GetMouse().x - scroll.x;
+		lineRect.bottom = INPUTMANAGER->GetMouse().y - scroll.y;
+		isOnDrawRect = true;
 	}
-	if (isOnMouseLine)
+	if (INPUTMANAGER->KeyPress(VK_LBUTTON))
 	{
 		lineRect.right = INPUTMANAGER->GetMouse().x - scroll.x;
 		lineRect.bottom = INPUTMANAGER->GetMouse().y - scroll.y;
-		if (INPUTMANAGER->KeyUp(VK_LBUTTON))
-			isOnMouseLine = false;
+	}
+}
+
+void AddNumberStreamFile(fstream *fs, int number)
+{
+	*fs << number << ",";
+}
+void AtlasImage::AddAtlasData()
+{
+	for (int i = 0; i < KEY_MAX; i++)
+	{
+		if (INPUTMANAGER->KeyDown(VK_BACK) && atlasName.size() != 0)
+		{
+			atlasName.pop_back();
+			break;
+		}
+		else if (INPUTMANAGER->KeyDown(VK_RETURN))
+		{
+			std::fstream fs;
+			fs.open(L"../Data/AtlasData.txt", ios::app);
+
+			if (fs.fail())
+			{
+				fs.close();
+				return;
+			}
+			//WriteAtlasName
+			fs << atlasName << "/";
+
+			//WriteRectInfo
+			AddNumberStreamFile(&fs, min(lineRect.left, lineRect.right));
+			AddNumberStreamFile(&fs, min(lineRect.top, lineRect.bottom));
+			AddNumberStreamFile(&fs, max(lineRect.right, lineRect.left));
+			AddNumberStreamFile(&fs, max(lineRect.bottom, lineRect.top));
+			fs << endl;
+
+			fs.close();
+			break;
+		}
+		else if (INPUTMANAGER->KeyDown(i) && i != VK_LBUTTON)
+		{
+			atlasName.push_back(i);
+		}
 	}
 }

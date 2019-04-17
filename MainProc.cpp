@@ -2,6 +2,7 @@
 #include "MainProc.h"
 
 #include "AtlasScene.h"
+#include "SpineScene.h"
 
 MainProc::MainProc()
 {
@@ -20,6 +21,14 @@ void MainProc::Init()
 void MainProc::Update()
 {
 	SCENEMANAGER->Update();
+	if (INPUTMANAGER->KeyDown('1'))
+	{
+		SCENEMANAGER->AddScene(new AtlasScene());
+	}
+	else if (INPUTMANAGER->KeyDown('2'))
+	{
+		SCENEMANAGER->AddScene(new SpineScene());
+	}
 	INPUTMANAGER->Update();
 }
 

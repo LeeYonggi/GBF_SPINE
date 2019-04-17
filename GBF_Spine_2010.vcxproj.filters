@@ -42,6 +42,9 @@
     <Filter Include="Object\AtlasImage">
       <UniqueIdentifier>{dfddb754-109d-4a75-b90f-d71ec0dc12ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\SpineScene">
+      <UniqueIdentifier>{c7d5761d-9d24-43b3-b1d5-c9a454bfd697}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -131,6 +134,9 @@
     <ClCompile Include="AtlasImage.cpp">
       <Filter>Object\AtlasImage</Filter>
     </ClCompile>
+    <ClCompile Include="SpineScene.cpp">
+      <Filter>Scene\SpineScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -163,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="AtlasImage.h">
       <Filter>Object\AtlasImage</Filter>
+    </ClInclude>
+    <ClInclude Include="SpineScene.h">
+      <Filter>Scene\SpineScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

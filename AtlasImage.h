@@ -10,7 +10,8 @@ public:
 private:
 	Vector2 scroll = { 0, 0 };
 	RECT lineRect = { 0, 0, 0, 0 };
-	bool isOnMouseLine = false;
+	bool isOnDrawRect = false;
+	string atlasName = "";
 
 public:
 	virtual void Init()		override;
@@ -20,6 +21,7 @@ public:
 
 	void ScrollControl();
 	void CreateMouseLine();
+	void AddAtlasData();
 
 };
 

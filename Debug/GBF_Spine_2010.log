@@ -1,0 +1,5 @@
+﻿  MainProc.cpp
+  SpineScene.cpp
+  코드를 생성하고 있습니다...
+AtlasImage.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/SAFESEH' 사양으로 인해 무시됩니다.
+  GBF_Spine_2010.vcxproj -> D:\Programming\PJ\Directx\GBF_SPINE\Debug\GBF_Spine.exe

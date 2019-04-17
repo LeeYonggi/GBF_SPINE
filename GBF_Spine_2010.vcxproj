@@ -393,6 +393,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SpineScene.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClInclude Include="AtlasImage.h" />
     <ClInclude Include="AtlasScene.h" />
@@ -403,6 +404,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SpineScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UI.h" />
     <None Include="DXUT\Optional\directx.ico" />
