@@ -51,6 +51,9 @@
     <Filter Include="Object\SpineAdmin">
       <UniqueIdentifier>{93d261f8-3f30-4818-8def-3f45261d8a9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{4c658236-b838-4bfd-9ccd-dd543dfa8a84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -149,6 +152,9 @@
     <ClCompile Include="SpineAdmin.cpp">
       <Filter>Object\SpineAdmin</Filter>
     </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -190,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="SpineAdmin.h">
       <Filter>Object\SpineAdmin</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

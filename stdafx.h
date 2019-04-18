@@ -11,6 +11,7 @@ typedef D3DXVECTOR2 Vector2;
 
 typedef D3DXMATRIX Matrix;
 
+#include "Utility.h"
 
 #include "ImageManager.h"
 #include "InputManager.h"

@@ -2,6 +2,24 @@
 #include "Object.h"
 
 class ImagePiece;
+class UI;
+
+class KeyDownToInt
+{
+public:
+	KeyDownToInt() { }
+	virtual ~KeyDownToInt() { }
+
+public:
+	bool isKeyUpdate = false;
+	int result = 0;
+	string str = "";
+
+public:
+	void Update();
+	int GetResult();
+};
+
 class SpineAdmin :
 	public Object
 {
@@ -12,12 +30,16 @@ public:
 private:
 	list<ImagePiece*> vImagePiece;
 	ImagePiece *nowMoveImage = nullptr;
-	bool isImageMoveing = false;
-	int maxFrame = 30;
-	float frame = 0.0f;
 	Vector2 spinePos = { 0, 0 };
 	Vector2 spineScale = { 1, 1 };
+	KeyDownToInt frameKeyDown;
+	UI *startUi = nullptr;
+	UI *endUi = nullptr;
 	float spineRotate = 0;
+	float frame = 0.0f;
+	int maxFrame = 30;
+	bool isImageMoveing = false;
+	bool isFrameUpdate = false;
 
 public:
 	virtual void Init()		override;
@@ -30,7 +52,9 @@ public:
 
 public:
 	list<ImagePiece*> GetImagePieces() { return vImagePiece; }
+	void OptionFunc();
 	void DrawOption();
 	void DrawFrame();
+	void FrameUpdateStart();
+	void FrameUpdateEnd();
 };
-

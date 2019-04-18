@@ -1,16 +1,15 @@
 #include "DXUT.h"
 #include "ImagePiece.h"
 
-Matrix GetTransformationMatrix(Vector2 pos, Vector2 scale, float rotate)
+KeyFrame GetTransformationKeyFrame(Vector2 pos, Vector2 scale, float rotate, bool isKeyFrame)
 {
-	Matrix matW, matS, matR, matT;
+	KeyFrame temp;
 
-	D3DXMatrixScaling(&matS, scale.x, scale.y, 1);
-	D3DXMatrixRotationZ(&matR, D3DXToRadian(rotate));
-	D3DXMatrixTranslation(&matT, pos.x, pos.y, 0);
-
-	matW = matS * matR * matT;
-	return matW;
+	temp.isKeyFrame = isKeyFrame;
+	temp.pos = pos;
+	temp.scale = scale;
+	temp.rotation = rotate;
+	return temp;
 }
 
 ImagePiece::ImagePiece(Texture * atlasImage, RECT rectImage, string pieceName, float maxFrame)
@@ -22,14 +21,13 @@ ImagePiece::ImagePiece(Texture * atlasImage, RECT rectImage, string pieceName, f
 
 	KeyFrame first;
 	first.isKeyFrame = true;
-	first.mat = GetTransformationMatrix(pos, size, rotation);
-	vFrameMatrix.push_back(first);
+	first.pos = pos;
+	vKeyFrame.push_back(first);
 	for (int i = 0; i < maxFrame; i++)
 	{
 		KeyFrame temp;
-		temp.isKeyFrame = false;
-		temp.mat = GetTransformationMatrix(pos, size, rotation);
-		vFrameMatrix.push_back(temp);
+		temp = GetTransformationKeyFrame(pos, size, rotation, false);
+		vKeyFrame.push_back(temp);
 	}
 }
 
@@ -41,29 +39,64 @@ void ImagePiece::Init()
 {
 }
 
+//프레임 보간
+KeyFrame KeyFrameLerp(KeyFrame frame1, KeyFrame frame2, float d)
+{
+	KeyFrame tempKey;
+
+	tempKey.pos = Lerp(frame1.pos, frame2.pos, d);
+	tempKey.rotation = Lerp(frame1.rotation, frame2.rotation, d);
+	tempKey.scale = Lerp(frame1.scale, frame2.scale, d);
+	tempKey.isKeyFrame = false;
+
+	return tempKey;
+}
+
+void KeyFrameVecLerp(vector<int> keyIndexCheck, vector<KeyFrame> *keyFrameData)
+{
+	for (int i = 0; i < keyIndexCheck.size() - 1; i++)
+	{
+		for (int j = keyIndexCheck[i] + 1; j < keyIndexCheck[i + 1]; j++)
+		{
+			KeyFrame firstKeyFrame = (*keyFrameData)[keyIndexCheck[i]];
+			KeyFrame secondKeyFrame = (*keyFrameData)[keyIndexCheck[i + 1]];
+			
+			//키프레임 사이를 보간
+			(*keyFrameData)[j] = KeyFrameLerp(firstKeyFrame, secondKeyFrame, (float)j / (float)keyIndexCheck[i + 1]);
+		}
+	}
+}
+
 void ImagePiece::Update()
 {
 	vector<int> vTempFrame;
-	for (int i = 0; i < vFrameMatrix.size(); i++)
+	for (int i = 0; i < vKeyFrame.size(); i++)
 	{
-		if (vFrameMatrix[i].isKeyFrame == true)
+		if (vKeyFrame[i].isKeyFrame == true)
 			vTempFrame.push_back(i);
 	}
 	if (vTempFrame.size() >= 2)
 	{
-
+		KeyFrameVecLerp(vTempFrame, &vKeyFrame);
 	}
-	KeyFrame tempKey = vFrameMatrix[vTempFrame.back()];
+	KeyFrame tempKey = vKeyFrame[vTempFrame.back()];
 	tempKey.isKeyFrame = false;
-	for (int i = vTempFrame.back() + 1; i < vFrameMatrix.size(); i++)
+	for (int i = vTempFrame.back() + 1; i < vKeyFrame.size(); i++)
 	{
-		vFrameMatrix[i] = tempKey;
+		vKeyFrame[i] = tempKey;
 	}
 }
 
 void ImagePiece::Render()
 {
-	IMAGEMANAGER->DrawTexture(atlasImage, pos + center, rectImage, rotation, size);
+	if (isFrameMove)
+	{
+		IMAGEMANAGER->DrawTexture(atlasImage, vKeyFrame[frame].pos + center, rectImage, vKeyFrame[frame].rotation, vKeyFrame[frame].scale);
+	}
+	else
+	{
+		IMAGEMANAGER->DrawTexture(atlasImage, pos + center, rectImage, rotation, size);
+	}
 }
 
 void ImagePiece::Release()
@@ -73,7 +106,6 @@ void ImagePiece::Release()
 void ImagePiece::AddKeyFrame(int frame)
 {
 	KeyFrame temp;
-	temp.isKeyFrame = true;
-	temp.mat = GetTransformationMatrix(pos, size, rotation);
-	vFrameMatrix[frame] = temp;
+	temp = GetTransformationKeyFrame(pos, size, rotation, true);
+	vKeyFrame[frame] = temp;
 }

@@ -3,7 +3,9 @@
 
 struct KeyFrame
 {
-	Matrix mat;
+	Vector2 pos = { 0, 0 };
+	Vector2 scale = { 1, 1 };
+	float rotation = 0.0f;
 	bool isKeyFrame = false;
 };
 class ImagePiece :
@@ -18,8 +20,9 @@ private:
 	RECT rectImage;
 	string pieceName = "";
 	Vector2 center = { SCREEN_X * 0.5f, SCREEN_Y * 0.5f };
-	vector<KeyFrame> vFrameMatrix;
+	vector<KeyFrame> vKeyFrame;
 	float frame = 0.0f;
+	bool isFrameMove = false;
 
 public:
 	virtual void Init()		override;
@@ -30,8 +33,10 @@ public:
 public:
 	POINT GetRectImageSize() { return {rectImage.right - rectImage.left, rectImage.bottom - rectImage.top }; }
 	void AddKeyFrame(int frame);
+	void SetFrameMove(bool param) { isFrameMove = param; }
 
 public:
 	void SetFrame(float param) { frame = param; }
+	bool GetFrameMove() { return isFrameMove; }
 };
 

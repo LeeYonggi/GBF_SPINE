@@ -75,5 +75,6 @@ void SpineScene::AddAtlasImage()
 	}
 
 	spineAdmin = new SpineAdmin(vImagePiece);
+	spineAdmin->Init();
 	fs.close();
 }

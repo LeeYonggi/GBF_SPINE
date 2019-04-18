@@ -397,6 +397,7 @@
     <ClCompile Include="SpineAdmin.cpp" />
     <ClCompile Include="SpineScene.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClInclude Include="AtlasImage.h" />
     <ClInclude Include="AtlasScene.h" />
     <ClInclude Include="ImageManager.h" />
@@ -411,6 +412,7 @@
     <ClInclude Include="SpineScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="Utility.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTenum.h" />
