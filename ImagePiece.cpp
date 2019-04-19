@@ -109,3 +109,31 @@ void ImagePiece::AddKeyFrame(int frame)
 	temp = GetTransformationKeyFrame(pos, size, rotation, true);
 	vKeyFrame[frame] = temp;
 }
+
+bool ImagePiece::IsPixelCollision(POINT point)
+{
+	D3DLOCKED_RECT lock;
+	bool isCollision = false;
+	
+	int infoX = rectImage.right - rectImage.left;
+	int infoY = rectImage.bottom - rectImage.top;
+	int x = (point.x - pos.x) + infoX * 0.5f;
+	int y = (point.y - pos.y) + infoY * 0.5f;
+
+	if (x < 0 || x > infoX ||
+		y < 0 || y > infoY)
+		return false;
+
+	atlasImage->tex->LockRect(0, &lock, &rectImage, D3DLOCK_DISCARD);
+
+	D3DXCOLOR *color = (D3DXCOLOR*)lock.pBits;
+
+	if (color[y * infoX + x].a != 0)
+		isCollision = true;
+	else
+		isCollision = false;
+
+	atlasImage->tex->UnlockRect(0);
+
+	return isCollision;
+}

@@ -38,5 +38,6 @@ public:
 public:
 	void SetFrame(float param) { frame = param; }
 	bool GetFrameMove() { return isFrameMove; }
+	bool IsPixelCollision(POINT point);
 };
 

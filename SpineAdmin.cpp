@@ -72,8 +72,10 @@ void SpineAdmin::Release()
 
 bool GetTuchImage(ImagePiece *imagePiece)
 {
-	POINT tempPos = { imagePiece->GetPos().x + SCREEN_X * 0.5, imagePiece->GetPos().y + SCREEN_Y * 0.5 };
-	if (imagePiece->IsCollisionRectMouse(tempPos, imagePiece->GetRectImageSize()))
+	POINT tempPos = { INPUTMANAGER->GetMouse().x - SCREEN_X * 0.5, INPUTMANAGER->GetMouse().y - SCREEN_Y * 0.5 };
+	//if (imagePiece->IsCollisionRectMouse(tempPos, imagePiece->GetRectImageSize()))
+	//	return true;
+	if (imagePiece->IsPixelCollision(tempPos))
 		return true;
 	return false;
 }
