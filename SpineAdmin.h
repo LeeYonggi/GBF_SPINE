@@ -7,17 +7,22 @@ class UI;
 class KeyDownToInt
 {
 public:
-	KeyDownToInt() { }
+	KeyDownToInt(POINT pos, POINT size)
+	: pos(pos), size(size)
+	{ 
+	}
 	virtual ~KeyDownToInt() { }
 
 public:
 	bool isKeyUpdate = false;
 	int result = 0;
 	string str = "";
+	POINT pos;
+	POINT size;
 
 public:
-	void Update();
-	int GetResult();
+	void Update(float *resultPoint);
+	float GetResult();
 };
 
 class SpineAdmin :
@@ -32,7 +37,7 @@ private:
 	ImagePiece *nowMoveImage = nullptr;
 	Vector2 spinePos = { 0, 0 };
 	Vector2 spineScale = { 1, 1 };
-	KeyDownToInt frameKeyDown;
+	vector<KeyDownToInt> vPutIndex;
 	UI *startUi = nullptr;
 	UI *endUi = nullptr;
 	float spineRotate = 0;

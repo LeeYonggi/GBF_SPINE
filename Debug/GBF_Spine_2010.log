@@ -1,10 +1,8 @@
-﻿  ImagePiece.cpp
-d:\programming\pj\directx\gbf_spine\imagepiece.cpp(57): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-d:\programming\pj\directx\gbf_spine\imagepiece.cpp(73): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-d:\programming\pj\directx\gbf_spine\imagepiece.cpp(84): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-d:\programming\pj\directx\gbf_spine\imagepiece.cpp(94): warning C4244: '인수': 'float'에서 'const unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\pj\directx\gbf_spine\imagepiece.cpp(106): warning C4458: 'frame' 선언은 클래스 멤버를 숨깁니다.
-  d:\programming\pj\directx\gbf_spine\imagepiece.h(24): note: 'ImagePiece::frame' 선언을 참조하십시오.
-d:\programming\pj\directx\gbf_spine\imagepiece.cpp(120): warning C4244: '초기화 중': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\pj\directx\gbf_spine\imagepiece.cpp(121): warning C4244: '초기화 중': 'FLOAT'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GBF_Spine_2010.vcxproj -> D:\Programming\PJ\Directx\GBF_SPINE\Debug\GBF_Spine.exe
+﻿  SpineAdmin.cpp
+d:\programming\pj\gbf_spine\spineadmin.cpp(85): warning C4838: 'double'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+d:\programming\pj\gbf_spine\spineadmin.cpp(85): warning C4244: '초기화 중': 'double'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\spineadmin.cpp(121): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\spineadmin.cpp(196): warning C4244: '인수': 'int'에서 'const char'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\spineadmin.cpp(201): warning C4244: '인수': 'int'에서 'const char'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\pj\gbf_spine\spineadmin.cpp(213): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GBF_Spine_2010.vcxproj -> D:\Programming\PJ\GBF_SPINE\Debug\GBF_Spine.exe

@@ -17,7 +17,14 @@ SpineAdmin::~SpineAdmin()
 
 void SpineAdmin::Init()
 {
-	startUi = new UI([&]() {FrameUpdateStart(); }, { 1140, 300, }, {200, 100}, "../Image/Start.png");
+	startUi = new UI([&]() {FrameUpdateStart(); }, { 1180, 200 }, {200, 100}, "../Image/Start.png");
+	endUi = new UI([&]() {FrameUpdateEnd(); }, { 1180, 300 }, { 200, 100 }, "../Image/Stop.png");
+	vPutIndex.push_back(KeyDownToInt({ 1100, 630 }, { 100, 40 }));
+	vPutIndex.push_back(KeyDownToInt({ 1100, 585 }, { 80, 20 }));
+	vPutIndex.push_back(KeyDownToInt({ 1200, 585 }, { 80, 20 }));
+	vPutIndex.push_back(KeyDownToInt({ 1100, 550 }, { 80, 20 }));
+	vPutIndex.push_back(KeyDownToInt({ 1200, 550 }, { 80, 20 }));
+	vPutIndex.push_back(KeyDownToInt({ 1100, 520 }, { 80, 20 }));
 }
 
 void SpineAdmin::Update()
@@ -43,9 +50,9 @@ void SpineAdmin::Update()
 		}
 	}
 	MoveImagePiece();
-	OptionFunc();
 	startUi->Update();
-	frameKeyDown.Update();
+	endUi->Update();;
+	OptionFunc();
 }
 
 void SpineAdmin::Render()
@@ -54,6 +61,7 @@ void SpineAdmin::Render()
 	if(nowMoveImage)
 		DrawOption();
 	startUi->Render();
+	endUi->Render();
 	DrawFrame();
 }
 
@@ -68,6 +76,8 @@ void SpineAdmin::Release()
 
 	SAFE_RELEASE(startUi);
 	SAFE_DELETE(startUi);
+	SAFE_RELEASE(endUi);
+	SAFE_DELETE(endUi);
 }
 
 bool GetTuchImage(ImagePiece *imagePiece)
@@ -105,7 +115,7 @@ void SpineAdmin::MoveImagePiece()
 	}
 	if (isImageMoveing && nowMoveImage)
 	{
-		//이미지 이동
+		//이미지 프레임 이동
 		Vector2 tempMouse = { (float)INPUTMANAGER->GetMouse().x, (float)INPUTMANAGER->GetMouse().y };
 		nowMoveImage->SetPos(tempMouse - Vector2(SCREEN_X * 0.5f, SCREEN_Y * 0.5f));
 		nowMoveImage->AddKeyFrame(frame);
@@ -118,25 +128,27 @@ void SpineAdmin::MoveImagePiece()
 
 void SpineAdmin::OptionFunc()
 {
-	if (INPUTMANAGER->KeyDown('R') && nowMoveImage)
+	if (!nowMoveImage) return;
+	if (INPUTMANAGER->KeyDown('R'))
 	{
 		nowMoveImage->SetPos({ 0, 0 });
 	}
-	if (INPUTMANAGER->KeyDown('D') && nowMoveImage)
+	if (INPUTMANAGER->KeyDown('D'))
 	{
 		nowMoveImage->SetDestroy(true);
 		nowMoveImage = nullptr;
 	}
-	if (IsCollisionRectMouse({ 1100, 625 }, {100, 50}) && INPUTMANAGER->KeyDown(VK_LBUTTON))
-	{
-		frameKeyDown.isKeyUpdate = true;
-		frameKeyDown.str = "";
-	}
-	if (frameKeyDown.isKeyUpdate && INPUTMANAGER->KeyDown(VK_RETURN))
-	{
-		frame = frameKeyDown.GetResult();
-		frameKeyDown.isKeyUpdate = false;
-	}
+	vPutIndex[0].Update(&frame);
+	Vector2 tempPos = nowMoveImage->GetPos(), tempSize = nowMoveImage->GetSize();
+	float tempRotate = nowMoveImage->GetRotation();
+	vPutIndex[1].Update(&tempPos.x);
+	vPutIndex[2].Update(&tempPos.y);
+	nowMoveImage->SetPos(tempPos);
+	vPutIndex[3].Update(&tempSize.x);
+	vPutIndex[4].Update(&tempSize.y);
+	nowMoveImage->SetSize(tempSize);
+	vPutIndex[5].Update(&tempRotate);
+	nowMoveImage->SetRotation(tempRotate);
 }
 
 void SpineAdmin::DrawOption()
@@ -169,8 +181,13 @@ void SpineAdmin::FrameUpdateEnd()
 	frame = 0;
 }
 
-void KeyDownToInt::Update()
+void KeyDownToInt::Update(float *resultPoint)
 {
+	if (IsCollisionRectMouse(pos, size) && INPUTMANAGER->KeyDown(VK_LBUTTON))
+	{
+		isKeyUpdate = true;
+		str = "";
+	}
 	if (isKeyUpdate == true)
 	{
 		for (int i = 48; i < 58; i++)
@@ -178,10 +195,20 @@ void KeyDownToInt::Update()
 			if(INPUTMANAGER->KeyDown(i))
 				str.push_back(i);
 		}
+		for (int i = 189; i <= 190; i++)
+		{
+			if (INPUTMANAGER->KeyDown(i))
+				str.push_back(i - 144);
+		}
+	}
+	if (isKeyUpdate && INPUTMANAGER->KeyDown(VK_RETURN))
+	{
+		isKeyUpdate = false;
+		*resultPoint = GetResult();
 	}
 }
 
-int KeyDownToInt::GetResult()
+float KeyDownToInt::GetResult()
 {
 	return atoi(str.c_str());
 }

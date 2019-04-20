@@ -62,7 +62,8 @@ void KeyFrameVecLerp(vector<int> keyIndexCheck, vector<KeyFrame> *keyFrameData)
 			KeyFrame secondKeyFrame = (*keyFrameData)[keyIndexCheck[i + 1]];
 			
 			//키프레임 사이를 보간
-			(*keyFrameData)[j] = KeyFrameLerp(firstKeyFrame, secondKeyFrame, (float)j / (float)keyIndexCheck[i + 1]);
+			(*keyFrameData)[j] = KeyFrameLerp(firstKeyFrame, secondKeyFrame, 
+				((float)j - keyIndexCheck[i]) / ((float)keyIndexCheck[i + 1] - keyIndexCheck[i]));
 		}
 	}
 }
@@ -124,11 +125,12 @@ bool ImagePiece::IsPixelCollision(POINT point)
 		y < 0 || y > infoY)
 		return false;
 
-	atlasImage->tex->LockRect(0, &lock, &rectImage, D3DLOCK_DISCARD);
+	atlasImage->tex->LockRect(0, &lock, nullptr, D3DLOCK_DISCARD);
 
-	D3DXCOLOR *color = (D3DXCOLOR*)lock.pBits;
+	DWORD *color = (DWORD*)lock.pBits;
 
-	if (color[y * infoX + x].a != 0)
+	int colorY = atlasImage->info.Width * (rectImage.top + y);
+	if (D3DXCOLOR(color[colorY + rectImage.left + x]).a != 0)
 		isCollision = true;
 	else
 		isCollision = false;

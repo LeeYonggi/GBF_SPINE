@@ -19,7 +19,6 @@ public:
 	virtual void Release()	PURE;
 
 public:
-	bool IsCollisionRectMouse(POINT p1, POINT reSize);
 
 public:
 	Vector2 GetPos() { return pos; }
