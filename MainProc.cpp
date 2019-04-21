@@ -20,11 +20,11 @@ void MainProc::Init()
 
 void MainProc::Update()
 {
-	if (INPUTMANAGER->KeyDown('Q'))
+	if (INPUTMANAGER->KeyDown(219))
 	{
 		SCENEMANAGER->AddScene(new AtlasScene());
 	}
-	else if (INPUTMANAGER->KeyDown('W'))
+	else if (INPUTMANAGER->KeyDown(221))
 	{
 		SCENEMANAGER->AddScene(new SpineScene());
 	}

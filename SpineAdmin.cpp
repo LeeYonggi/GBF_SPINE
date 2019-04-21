@@ -53,6 +53,7 @@ void SpineAdmin::Update()
 	startUi->Update();
 	endUi->Update();;
 	OptionFunc();
+	KeyDownFunc();
 }
 
 void SpineAdmin::Render()
@@ -138,6 +139,11 @@ void SpineAdmin::OptionFunc()
 		nowMoveImage->SetDestroy(true);
 		nowMoveImage = nullptr;
 	}
+}
+
+void SpineAdmin::KeyDownFunc()
+{
+	if (!nowMoveImage) return;
 	vPutIndex[0].Update(&frame);
 	Vector2 tempPos = nowMoveImage->GetPos(), tempSize = nowMoveImage->GetSize();
 	float tempRotate = nowMoveImage->GetRotation();
@@ -210,5 +216,5 @@ void KeyDownToInt::Update(float *resultPoint)
 
 float KeyDownToInt::GetResult()
 {
-	return atoi(str.c_str());
+	return atof(str.c_str());
 }

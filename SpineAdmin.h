@@ -58,6 +58,7 @@ public:
 public:
 	list<ImagePiece*> GetImagePieces() { return vImagePiece; }
 	void OptionFunc();
+	void KeyDownFunc();
 	void DrawOption();
 	void DrawFrame();
 	void FrameUpdateStart();
